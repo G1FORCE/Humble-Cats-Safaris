@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humble Cats Safari — Tanzania</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #C9A96E;
+    --sand-light: #F5EDD8;
+    --sand-dark: #8B6914;
+    --savanna: #2C1A0E;
+    --rust: #B84A1D;
+    --rust-light: #E8714A;
+    --sage: #5C7A4E;
+    --sage-light: #A8C99A;
+    --dusk: #1A1208;
+    --cream: #FAF6EE;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--dusk);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(26,18,8,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    color: var(--sand);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--cream); font-style: italic; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.75);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--sand); }
+
+  .nav-cta {
+    background: var(--rust);
+    color: var(--cream) !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2px;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.15em !important;
+  }
+  .nav-cta:hover { background: var(--rust-light); color: var(--dusk) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 4rem 6rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(184,74,29,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 20% 70%, rgba(92,122,78,0.12) 0%, transparent 50%),
+      linear-gradient(160deg, #0D0A04 0%, #1A1208 35%, #2C1A0E 70%, #1A1208 100%);
+  }
+
+  /* SVG Savanna landscape */
+  .hero-landscape {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2.5rem; height: 1px;
+    background: var(--sand);
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(250,246,238,0.7);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--rust);
+    color: var(--cream);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--rust-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    color: var(--sand);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: gap 0.3s;
+  }
+  .btn-ghost:hover { gap: 1rem; }
+  .btn-ghost::after { content: '→'; }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    background: var(--savanna);
+    border-top: 1px solid rgba(201,169,110,0.2);
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-item {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(201,169,110,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--font-serif);
+    font-size: 2.75rem;
+    color: var(--sand);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.5);
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 8rem 4rem; }
+
+  .section-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 1.5rem; height: 1px; background: var(--sand);
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 em { font-style: italic; color: var(--sand); }
+
+  /* ─── ABOUT ─── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(250,246,238,0.75);
+    margin-bottom: 1.25rem;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--savanna);
+    border: 1px solid rgba(201,169,110,0.25);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--rust), var(--sand));
+  }
+
+  .big-cat-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    line-height: 1;
+  }
+
+  .about-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--sand);
+  }
+
+  .about-card p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(250,246,238,0.65);
+  }
+
+  .accent-box {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(201,169,110,0.08);
+    border-left: 2px solid var(--sand);
+  }
+
+  .accent-box p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--sand-light);
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+
+  /* ─── SAFARIS ─── */
+  .safaris-section { background: var(--savanna); }
+
+  .safaris-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .safaris-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(201,169,110,0.1);
+  }
+
+  .safari-card {
+    background: var(--dusk);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: pointer;
+  }
+
+  .safari-card:hover { background: #251a0f; }
+
+  .safari-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rust), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .safari-card:hover::after { transform: scaleX(1); }
+
+  .safari-icon {
+    width: 48px; height: 48px;
+    background: rgba(184,74,29,0.15);
+    border: 1px solid rgba(184,74,29,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+  }
+
+  .safari-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+    color: var(--cream);
+  }
+
+  .safari-duration {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 1rem;
+  }
+
+  .safari-card p {
+    font-size: 0.875rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(250,246,238,0.6);
+    margin-bottom: 1.5rem;
+  }
+
+  .safari-price {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 1px solid rgba(201,169,110,0.15);
+    padding-top: 1.25rem;
+  }
+
+  .price-amount {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--sand);
+  }
+
+  .price-note {
+    font-size: 0.7rem;
+    color: rgba(250,246,238,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  .safari-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust-light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .safari-link:hover { color: var(--sand); }
+
+  /* ─── DESTINATIONS ─── */
+  .dest-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .dest-card {
+    background: var(--savanna);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 2px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dest-card.featured {
+    grid-row: span 2;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    min-height: 420px;
+    background:
+      linear-gradient(to top, rgba(26,18,8,0.95) 40%, rgba(26,18,8,0.3) 100%),
+      radial-gradient(ellipse at 50% 30%, rgba(184,74,29,0.4) 0%, transparent 60%),
+      linear-gradient(135deg, #2C1A0E 0%, #1A1208 100%);
+  }
+
+  .dest-number {
+    position: absolute; top: 1.25rem; right: 1.5rem;
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(201,169,110,0.08);
+    line-height: 1;
+  }
+
+  .dest-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust-light);
+    margin-bottom: 0.6rem;
+  }
+
+  .dest-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--cream);
+  }
+
+  .dest-card.featured h3 { font-size: 2rem; }
+
+  .dest-card p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(250,246,238,0.55);
+  }
+
+  /* ─── EXPERIENCES ─── */
+  .experiences { background: linear-gradient(160deg, var(--dusk) 0%, #1A1208 50%, var(--dusk) 100%); }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,169,110,0.1);
+    margin-top: 3rem;
+  }
+
+  .exp-item {
+    background: var(--dusk);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .exp-item:hover { background: #1e1409; }
+
+  .exp-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+  .exp-item h4 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--sand);
+  }
+
+  .exp-item p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(250,246,238,0.5);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section { background: var(--savanna); }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testimonial {
+    background: rgba(201,169,110,0.05);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 2px;
+    padding: 2rem;
+  }
+
+  .testimonial-stars { color: var(--sand); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+
+  .testimonial blockquote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(250,246,238,0.8);
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+
+  .author-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(184,74,29,0.25);
+    border: 1px solid rgba(184,74,29,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: var(--sand);
+    flex-shrink: 0;
+  }
+
+  .author-name { font-size: 0.8rem; font-weight: 500; color: var(--cream); }
+  .author-origin { font-size: 0.7rem; color: rgba(250,246,238,0.4); letter-spacing: 0.05em; }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    text-align: center;
+    padding: 10rem 4rem;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(184,74,29,0.18) 0%, transparent 70%),
+      var(--dusk);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'SAFARI';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: var(--font-serif);
+    font-size: 18vw;
+    font-weight: 700;
+    color: rgba(201,169,110,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.1em;
+  }
+
+  .cta-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); position: relative; }
+
+  .cta-section p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(250,246,238,0.6);
+    margin: 1.5rem auto 3rem;
+    max-width: 480px;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; position: relative; }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid rgba(201,169,110,0.5);
+    color: var(--sand);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--sand); background: rgba(201,169,110,0.08); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0D0A04;
+    border-top: 1px solid rgba(201,169,110,0.15);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .footer-brand .nav-logo { font-size: 1.4rem; display: block; margin-bottom: 1rem; }
+
+  .footer-brand p {
+    font-size: 0.825rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(250,246,238,0.4);
+    max-width: 280px;
+  }
+
+  .footer-col h5 {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul a {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: rgba(250,246,238,0.45);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul a:hover { color: var(--sand); }
+
+  .footer-bottom {
+    background: #0D0A04;
+    border-top: 1px solid rgba(201,169,110,0.08);
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 0.725rem;
+    color: rgba(250,246,238,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.8s ease 0.2s both; }
+  h1 { animation: fadeUp 0.8s ease 0.4s both; }
+  .hero-sub { animation: fadeUp 0.8s ease 0.6s both; }
+  .hero-actions { animation: fadeUp 0.8s ease 0.8s both; }
+
+  @keyframes drift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(15px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Humble <span>Cats</span> Safari</a>
+  <ul class="nav-links">
+    <li><a href="#safaris">Safaris</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- SVG landscape silhouette -->
+  <svg class="hero-landscape" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#B84A1D" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#B84A1D" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- Sun glow -->
+    <ellipse cx="1100" cy="60" rx="120" ry="60" fill="url(#skyGrad)"/>
+    <!-- Mountains distant -->
+    <path d="M0,280 L60,220 L130,260 L200,190 L280,240 L350,180 L430,230 L500,200 L560,240 L620,195 L700,250 L780,185 L860,240 L940,195 L1020,255 L1100,190 L1180,245 L1260,200 L1340,255 L1440,220 L1440,320 L0,320Z" fill="rgba(44,26,14,0.5)"/>
+    <!-- Ground layer -->
+    <path d="M0,295 Q100,285 200,295 Q350,310 500,295 Q650,280 800,295 Q950,308 1100,295 Q1250,285 1440,298 L1440,320 L0,320Z" fill="#2C1A0E"/>
+    <!-- Acacia trees -->
+    <g fill="#1A1208">
+      <!-- Tree 1 -->
+      <rect x="180" y="240" width="5" height="55"/>
+      <ellipse cx="182" cy="230" rx="35" ry="18"/>
+      <ellipse cx="165" cy="235" rx="20" ry="12"/>
+      <ellipse cx="200" cy="233" rx="22" ry="13"/>
+      <!-- Tree 2 -->
+      <rect x="520" y="250" width="4" height="45"/>
+      <ellipse cx="522" cy="240" rx="28" ry="14"/>
+      <ellipse cx="507" cy="244" rx="16" ry="10"/>
+      <ellipse cx="537" cy="242" rx="18" ry="11"/>
+      <!-- Tree 3 -->
+      <rect x="950" y="245" width="5" height="50"/>
+      <ellipse cx="952" cy="234" rx="38" ry="16"/>
+      <ellipse cx="935" cy="238" rx="22" ry="12"/>
+      <ellipse cx="970" cy="236" rx="25" ry="13"/>
+      <!-- Tree 4 -->
+      <rect x="1250" y="252" width="4" height="42"/>
+      <ellipse cx="1252" cy="243" rx="30" ry="14"/>
+      <ellipse cx="1238" cy="246" rx="18" ry="10"/>
+      <ellipse cx="1267" cy="245" rx="20" ry="11"/>
+      <!-- Small bush -->
+      <ellipse cx="350" cy="290" rx="22" ry="10"/>
+      <ellipse cx="750" cy="292" rx="18" ry="8"/>
+      <ellipse cx="1150" cy="291" rx="24" ry="9"/>
+    </g>
+    <!-- Giraffe silhouette -->
+    <g fill="#1A1208" transform="translate(800, 220)">
+      <rect x="0" y="40" width="8" height="40"/>
+      <rect x="18" y="45" width="8" height="35"/>
+      <rect x="36" y="40" width="8" height="40"/>
+      <rect x="52" y="45" width="8" height="35"/>
+      <path d="M0,40 Q4,15 28,10 Q30,5 28,0 L32,0 Q30,5 32,10 Q55,15 60,40Z"/>
+      <path d="M28,10 Q25,5 27,0 M32,10 Q35,5 33,0" stroke="#1A1208" stroke-width="2"/>
+      <ellipse cx="29" cy="12" rx="12" ry="8"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Tanzania, East Africa</p>
+    <h1>Where the Wild<br><em>Kingdom</em> Awaits</h1>
+    <p class="hero-sub">Experience the Serengeti like never before — guided by passion, driven by conservation, crafted for the curious soul.</p>
+    <div class="hero-actions">
+      <a href="#safaris" class="btn-primary">Explore Safaris</a>
+      <a href="#about" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">17+</div>
+    <div class="stat-label">Years in Tanzania</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4,200</div>
+    <div class="stat-label">Happy Travellers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Big 5</div>
+    <div class="stat-label">Guaranteed Sightings</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Eco-Certified</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-text">
+      <p class="section-tag">Who We Are</p>
+      <h2>Born from <em>Africa's</em><br>Untamed Spirit</h2>
+      <p>Humble Cats Safari was founded by lifelong Tanzanian guides who believe the land should speak first. We are not a mass-tourism operator — we are a small, devoted team that knows every corner of the Serengeti, Ngorongoro, and the Selous by heart.</p>
+      <p>Our name reflects our philosophy: like the big cats we track, we move with patience, respect, and deep attunement to the rhythms of the wild. Every expedition is bespoke, every guide hand-selected, every camp chosen for its intimacy with nature.</p>
+      <div class="accent-box">
+        <p>"We don't take you to see Africa. We let Africa reveal itself to you."</p>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-card">
+        <span class="big-cat-icon">🐆</span>
+        <h3>Conservation First</h3>
+        <p>A portion of every safari booking directly funds anti-poaching rangers, community schools, and wildlife corridor preservation across northern Tanzania.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFARIS -->
+<section id="safaris" class="safaris-section">
+  <div class="safaris-header">
+    <div>
+      <p class="section-tag">Our Expeditions</p>
+      <h2>Tailored <em>Safari</em> Journeys</h2>
+    </div>
+    <a href="#contact" class="btn-ghost">View all safaris</a>
+  </div>
+  <div class="safaris-grid">
+
+    <div class="safari-card">
+      <div class="safari-icon">🦁</div>
+      <h3>Serengeti Classic</h3>
+      <div class="safari-duration">7 Days · 6 Nights</div>
+      <p>The quintessential Tanzania experience. Witness the Great Migration, golden plains, and big cat encounters from luxury tented camps in the heart of the Serengeti.</p>
+      <div class="safari-price">
+        <div>
+          <div class="price-amount">$3,850</div>
+          <div class="price-note">per person</div>
+        </div>
+        <a href="#contact" class="safari-link">Enquire →</a>
+      </div>
+    </div>
+
+    <div class="safari-card">
+      <div class="safari-icon">🦏</div>
+      <h3>Ngorongoro Crater</h3>
+      <div class="safari-duration">5 Days · 4 Nights</div>
+      <p>Descend into the world's largest intact volcanic caldera — a natural fortress sheltering over 25,000 animals, including the critically endangered black rhino.</p>
+      <div class="safari-price">
+        <div>
+          <div class="price-amount">$2,950</div>
+          <div class="price-note">per person</div>
+        </div>
+        <a href="#contact" class="safari-link">Enquire →</a>
+      </div>
+    </div>
+
+    <div class="safari-card">
+      <div class="safari-icon">🌊</div>
+      <h3>Selous Wilderness</h3>
+      <div class="safari-duration">8 Days · 7 Nights</div>
+      <p>Africa's largest game reserve, virtually untouched. Boat safaris along the Rufiji River, walking safaris with armed rangers, and the absolute silence of the south.</p>
+      <div class="safari-price">
+        <div>
+          <div class="price-amount">$4,400</div>
+          <div class="price-note">per person</div>
+        </div>
+        <a href="#contact" class="safari-link">Enquire →</a>
+      </div>
+    </div>
+
+    <div class="safari-card">
+      <div class="safari-icon">🏔️</div>
+      <h3>Kilimanjaro & Safari</h3>
+      <div class="safari-duration">12 Days · 11 Nights</div>
+      <p>Summit Africa's roof at 5,895m, then descend to the Amboseli plains for elephant herds against the mountain's snowcapped silhouette. The ultimate Tanzania adventure.</p>
+      <div class="safari-price">
+        <div>
+          <div class="price-amount">$5,200</div>
+          <div class="price-note">per person</div>
+        </div>
+        <a href="#contact" class="safari-link">Enquire →</a>
+      </div>
+    </div>
+
+    <div class="safari-card">
+      <div class="safari-icon">🦓</div>
+      <h3>Migration Special</h3>
+      <div class="safari-duration">10 Days · 9 Nights</div>
+      <p>Time your visit to witness the river crossings — 1.5 million wildebeest surging through crocodile-filled waters. Nature's most dramatic spectacle, seen up close.</p>
+      <div class="safari-price">
+        <div>
+          <div class="price-amount">$4,850</div>
+          <div class="price-note">per person</div>
+        </div>
+        <a href="#contact" class="safari-link">Enquire →</a>
+      </div>
+    </div>
+
+    <div class="safari-card">
+      <div class="safari-icon">🏝️</div>
+      <h3>Safari & Zanzibar</h3>
+      <div class="safari-duration">10 Days · 9 Nights</div>
+      <p>The perfect pairing: three days of thrilling game drives followed by white-sand beaches, turquoise waters, and the historic spice island of Zanzibar.</p>
+      <div class="safari-price">
+        <div>
+          <div class="price-amount">$4,100</div>
+          <div class="price-note">per person</div>
+        </div>
+        <a href="#contact" class="safari-link">Enquire →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations">
+  <p class="section-tag">Where We Go</p>
+  <h2>Tanzania's Most <em>Iconic</em> Landscapes</h2>
+  <div class="dest-grid">
+
+    <div class="dest-card featured">
+      <div class="dest-number">01</div>
+      <div class="dest-tag">Most Popular</div>
+      <h3>Serengeti National Park</h3>
+      <p>The world's greatest wildlife theatre. Over 1.5 million wildebeest, 500,000 zebra, and countless predators roam 14,750 km² of endless golden plains.</p>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-number">02</div>
+      <div class="dest-tag">UNESCO Site</div>
+      <h3>Ngorongoro Crater</h3>
+      <p>A collapsed volcano sheltering a lost world.</p>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-number">03</div>
+      <div class="dest-tag">Remote Wilderness</div>
+      <h3>Selous Reserve</h3>
+      <p>Africa's wildest and most untouched landscape.</p>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-number">04</div>
+      <div class="dest-tag">Elephant Country</div>
+      <h3>Tarangire</h3>
+      <p>Vast baobab savannas teeming with elephant herds.</p>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-number">05</div>
+      <div class="dest-tag">Spice Islands</div>
+      <h3>Zanzibar</h3>
+      <p>Powder beaches and a rich Swahili heritage.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" class="experiences">
+  <p class="section-tag">What You'll Live</p>
+  <h2>More Than a <em>Game Drive</em></h2>
+  <div class="exp-grid">
+    <div class="exp-item">
+      <span class="exp-icon">🌅</span>
+      <h4>Dawn Bush Walks</h4>
+      <p>On foot at sunrise with a master tracker — see the bush at eye level.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">🎈</span>
+      <h4>Hot Air Balloon</h4>
+      <p>Float silently over the Serengeti as the sun rises above the plains.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">🍽️</span>
+      <h4>Bush Dinners</h4>
+      <p>Candle-lit tables under the Milky Way with Swahili-inspired cuisine.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">📸</span>
+      <h4>Photography Safaris</h4>
+      <p>Dedicated photo vehicles with custom hatches for the perfect shot.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">🏘️</span>
+      <h4>Maasai Village Visits</h4>
+      <p>Authentic cultural exchange with local Maasai communities.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">⭐</span>
+      <h4>Stargazing Nights</h4>
+      <p>No light pollution — just the Southern Cross and a cold sundowner.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">🚤</span>
+      <h4>River Boat Safaris</h4>
+      <p>Hippos, crocs, and water birds along the Rufiji River at dusk.</p>
+    </div>
+    <div class="exp-item">
+      <span class="exp-icon">🌿</span>
+      <h4>Conservation Tours</h4>
+      <p>Join our rangers and wildlife vets in the field for a day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <p class="section-tag">Traveller Stories</p>
+  <h2>Voices from the <em>Wild</em></h2>
+  <div class="testimonials-grid">
+
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <blockquote>"Watching a lioness hunt at dusk while our guide whispered the story of her pride — no documentary prepared me for the raw emotion of that moment."</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">SB</div>
+        <div>
+          <div class="author-name">Sarah B.</div>
+          <div class="author-origin">London, United Kingdom</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <blockquote>"Humble Cats is genuinely different. Our guide Ahmed knew each elephant by name. The intimacy and depth of knowledge transformed a holiday into a life event."</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">MK</div>
+        <div>
+          <div class="author-name">Marcus K.</div>
+          <div class="author-origin">Berlin, Germany</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <blockquote>"The balloon over the migration and the bush dinner that followed — my husband proposed under a sky full of stars. Tanzania gave us the most perfect night of our lives."</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">PC</div>
+        <div>
+          <div class="author-name">Priya C.</div>
+          <div class="author-origin">Mumbai, India</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <p class="section-tag" style="justify-content: center;">Start Your Journey</p>
+  <h2>Ready to Meet <em>Africa</em>?</h2>
+  <p>Every great safari begins with a single conversation. Tell us your dream and we'll craft the expedition that belongs only to you.</p>
+  <div class="cta-actions">
+    <a href="mailto:gospelayo3@gmail.com" class="btn-primary">Send an Enquiry</a>
+    <a href="https://wa.me/255627037380?text=Hello,%20how%20may%20we%20help%20you" class="btn-outline">+255 627 037 380</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="#" class="nav-logo">Humble <span>Cats</span> Safari</a>
+    <p>A boutique safari operator based in Arusha, Tanzania. Licensed, eco-certified, and guided by love for the land we call home.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Safaris</h5>
+    <ul>
+      <li><a href="#">Serengeti Classic</a></li>
+      <li><a href="#">Ngorongoro Crater</a></li>
+      <li><a href="#">Selous Wilderness</a></li>
+      <li><a href="#">Migration Special</a></li>
+      <li><a href="#">Zanzibar Combo</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h5>Destinations</h5>
+    <ul>
+      <li><a href="#">Serengeti</a></li>
+      <li><a href="#">Ngorongoro</a></li>
+      <li><a href="#">Tarangire</a></li>
+      <li><a href="#">Selous / Nyerere</a></li>
+      <li><a href="#">Zanzibar</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h5>Contact</h5>
+    <ul>
+      <li><a href="#">Arusha, Tanzania</a></li>
+      <li><a href="mailto:gospelayo3@gmail.com">hello@gospelayo3@gmail.com</a></li>
+      <li><a href="tel:+255627037380">+255 627 037 380</a></li>
+      <li><a href="https://instagram.com/gospel_f.a">Instagram</a></li>
+      <li><a href="https://wa.me/255627037380?text=Hello%20I%20want%20to%20contact%20you">WhatsApp</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Humble Cats Safari. All rights reserved.</p>
+  <p>Licensed Tanzania Safari Operator · TATO Member · Eco-Certified</p>
+</div>
+
+</body>
+</html>
