@@ -1,7 +1,4 @@
 # Humble-Cats-Safaris
-Here's a clean README for your GitHub:
-
----
 
 **Humble Cats Safari — Tourism Website**
 
